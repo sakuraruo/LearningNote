@@ -99,7 +99,73 @@ BeanPostProcessor是Spring所提供的一种扩展机制，可以利用该机制
 
 BeanPostProcessor在Spring中的一个接口，我们定义一个后置处理器，就是提供一个类实现该接口，在Spring中还存在一些接口集成了BeanPostprocessor，这些子接口是在BeanPostProcessor的基础上增加了一些其他功能。
 
-BeanPostProcessor
+BeanPostProcessor中的方法：postProcessBeforeInitialization() 初始化前方法，表示可以利用这个方法来对Bean在初始化前进行自定义加工；postProcessAfterInitialization()初始化后方法，表示可以利用这个方法来对Bean在初始化后进行自定义加工。
+
+InstantiationAwareBeanPostProcessor，BeanPostProcessor的一个子接口，postProcessBeforeInstantiation()：实例化前；postProcessAfterInstantiation():实例化后；postProcessProperties():属性注入后
+
+18.什么是AOP？
+
+AOP是面向切面编程，是一种非常适合在无需修改业务代码的前提下，对某个或某些业务增加统一的功能，比如日志记录、权限控制、事务管理等，能很好的使得代码解耦，提高开发效率。
+
+AOP中的核心概念：Advice、PointCut、Advisor、Weaving、Target、JoinPoint
+
+Advice可以理解为通知、建议，在Spring中通过定义Advice来定义代理逻辑。
+
+Pointcut是切点，表示Advice对应的代理逻辑应用在哪个类、哪个方法上。
+
+Advisor等于advice+pointcut，表示代理逻辑和切点的一个整体，可以通过定义或封装一个advisor，来定义切点和代理逻辑。
+
+Weaving表示织入，将Advice的代理逻辑在源代码级别嵌入到切点的过程，就叫做织入。
+
+Target表示目标对象，也就是被代理对象，在AOP生成的代理对象中会持有目标对象。
+
+JoinPoint表示连接点，在Spring-AOP中，就是方法的执行点。
+
+AOP的工作原理：
+
+AOP是发生在Bean的生命周期过程中的：
+
+1.Spring生成Bean对象时，先实例化出来一个对象，也就是target对象。
+
+2.再去target对象进行填充。
+
+3.在初始化后步骤中，会判断target对象有没有对应的切面。
+
+4.如果有切面，就表示当前target对象需要进行aop。
+
+5.通过cglib、jdk动态代理机制生成一个代理对象，作为最终的bean对象。
+
+
+
+19.JavaBean、SpringBean、对象之间的区别
+
+对象指Java语言中的类实例、类对象。
+
+JavaBean指的是属性为私有，只提供get set方法的类。
+
+SpringBean则是代表由Spring创建管理的对象。
+
+
+
+20.Bean标签、@Bean、@component等注解的区别。
+
+如果是从xml中读取则是使用ClassPathXmlApplicationContext；如果是注解，则是使用AnnotationConfigApplicationContext。
+
+21.BeanDefinition定义一个Bean
+
+声明一个BeanDefinition然后注入入Spring容器。
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
