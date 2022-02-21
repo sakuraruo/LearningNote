@@ -65,6 +65,50 @@ BeanDefinition(Bean定义)=>构造方法推断(选出一个构造方法)=>实例
 
 会将#{}中的字符串当作Spring表达式进行解析，Spring会把{}中的值当作beanName并从Spring容器中找对应的bean，如果找到则进行属性注入，没找到则报错。
 
+15.FactoryBean是什么？
+
+FactoryBean是Spring所提供的一种较灵活的创建Bean的方式，可以通过实现FactoryBean接口中的getObject方法来返回一个对象，这个对象就是最终的Bean对象。
+
+FactoryBean接口中的方法：Object getObject()返回的是Bean对象；boolean isSingleton()返回的是否是单例对象；Class getObjectType(); 返回的是Bean对象的类型。
+
+FactoryBean对象本身也是一个Bean，同时它相当于一个小型工厂，可以生产出另外的Bean。BeanFactory是一个Spring容器，是一个大型工厂，它可以生产出各种各样的bean。
+
+FactoryBean机制被广泛的应用在Spring内部和Spring与第三方框架或组件的整合过程中。
+
+16.什么是ApplicationContext？
+
+ApplicationContext是比BeanFactory更加强大的Spring容器，它既可以创建Bean、获取Bean还支持国际化、事件广播、获取资源等BeanFactory不具备的功能。
+
+ApplicationContext所继承的接口：EnvironmentCapable、ListableBeanFactory、HierarchicalBeanFactory、MessageSource、ApplicationEventPublisher、ResourcePatternResolver。
+
+EnvironmentCapable继承这个接口，表示拥有了获取环境变量的功能，可以通过ApplicationContext获取操作系统环境变量和JVM环境变量。
+
+ListableBeanFactory继承了这个接口，就拥有了获取所有BeanNames、判断某个beanName是否存在BeanDefinition对象、统计BeanDefinition个数、获取某个类型所有对应BeanNames等功能。
+
+HierarchicalBeanFactory继承了这个接口，就拥有了获取父BeanFactory、判断某个name是否存在bean对象的功能。
+
+MessageSource继承了这个接口，就拥有了国际化功能，比如可以直接利用MessageSource对象获取某个国际化资源(比如不同国家语言所对应的字符）
+
+ApplicationEventPublisher继承了这个接口，就拥有了事件发布功能，可以发布事件，这是Application相对于BeanFactory比较突出、常用的功能。
+
+ResourcePatternResolver继承了这个接口，就拥有了加载并获取资源的功能，这里的资源可以是文件，图片等某个URL资源都可以。
+
+17.什么是BeanPostProcessor？
+
+BeanPostProcessor是Spring所提供的一种扩展机制，可以利用该机制对Bean进行定制化加工，在Spring底层源码实现中，也广泛的用到了该机制，BeanPostProcessor通常也叫做Bean后置处理器。
+
+BeanPostProcessor在Spring中的一个接口，我们定义一个后置处理器，就是提供一个类实现该接口，在Spring中还存在一些接口集成了BeanPostprocessor，这些子接口是在BeanPostProcessor的基础上增加了一些其他功能。
+
+BeanPostProcessor
+
+
+
+
+
+
+
+
+
 
 
 
