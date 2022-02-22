@@ -157,6 +157,28 @@ SpringBean则是代表由Spring创建管理的对象。
 
 
 
+22.@componentScan注解之扫描索引
+
+当META-INF目录下spring-component文件中存放需要扫描的类，如果配置了该类，则Spring不会再通过路径进行全局扫描。
+
+23.@Conditional注解
+
+@conditional注解中有一个数组属性，类型为Condition类的子类，实现match方法。该方法的入参中包含了很多属性。
+
+24.@autowired注解
+
+@AutoWired注解是首先根据类型去匹配找到多个的话再根据名称去找。
+
+25.@lazy注解
+
+@Lazy注解加在Bean上面，则代表Bean初始化实际放在getBean的时候。
+
+可以通过@Lazy注解解决循环依赖报错的问题
+
+
+
+
+
 
 
 
