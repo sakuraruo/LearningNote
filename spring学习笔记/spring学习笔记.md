@@ -175,6 +175,10 @@ SpringBean则是代表由Spring创建管理的对象。
 
 可以通过@Lazy注解解决循环依赖报错的问题
 
+26.@Resource注解
+
+@Resource注解会首先根据名称去找，找不到再根据类型去找。
+
 
 
 
