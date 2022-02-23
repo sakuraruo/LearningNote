@@ -187,6 +187,32 @@ Bean含义为配置Bean。
 
 如果Bean上没有@Configuration注解：如果存在@Component注解，则该Bean为lite配置Bean；如果存在@ComponentScan注解，那么也是一个lite配置Bean；存在@import注解就是lite配置Bean；存在@importResource注解就是lite配置Bean；Bean存在@Bean注解方法就是lite配置Bean。
 
+28.@Import注解
+
+@Import可以将某个类直接导入到Spring容器中并当作配置Bean。
+
+29.@Lookup
+
+方法注入，可以让方法返回一个代理对象，如果value有值，则会去容器中查找bean再返回。
+
+30.@primary注解
+
+在查找了多个符合的Bean，使用那个优先的。
+
+31.SmartFactoryBean接口
+
+SmartFactoryBean可以控制Bean创建时机。
+
+
+
+
+
+
+
+
+
+
+
 
 
 
