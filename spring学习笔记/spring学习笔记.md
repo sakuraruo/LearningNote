@@ -179,7 +179,15 @@ SpringBean则是代表由Spring创建管理的对象。
 
 @Resource注解会首先根据名称去找，找不到再根据类型去找。
 
-27.
+27.@Configuration注解
+
+Bean含义为配置Bean。
+
+@Configuration中有个boolean类型属性proxyBeanMethod，默认为true，代表为full配置Bean。Full配置Bean创建出来的是代理对象。反之对应的是lite对象，创建出来的是原生Bean对象。
+
+如果Bean上没有@Configuration注解：如果存在@Component注解，则该Bean为lite配置Bean；如果存在@ComponentScan注解，那么也是一个lite配置Bean；存在@import注解就是lite配置Bean；存在@importResource注解就是lite配置Bean；Bean存在@Bean注解方法就是lite配置Bean。
+
+
 
 
 
