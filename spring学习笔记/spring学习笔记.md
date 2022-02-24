@@ -203,6 +203,18 @@ Bean含义为配置Bean。
 
 SmartFactoryBean可以控制Bean创建时机。
 
+32.Bean有哪些作用域
+
+单例、原型、Request、Session、Application
+
+33.Spring中类型转换器
+
+jdk中的propertyEdit(适用于String转其他类型)、Spring中conversionService、TypeConverter(类似于前面二合一)
+
+34.SpringAOP有哪些使用方式？
+
+
+
 
 
 
