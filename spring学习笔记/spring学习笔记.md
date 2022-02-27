@@ -213,6 +213,40 @@ jdk中的propertyEdit(适用于String转其他类型)、Spring中conversionServi
 
 34.SpringAOP有哪些使用方式？
 
+Spring-aop提供了ProxyFactory类来进行生成代理对象，已经对jdk动态代理与cglib动态代理进行了封装。
+
+要将代理对象注册到Spring容器，则提供了ProxyFactoryBean类。
+
+Spring提供了一个自动代理创建器，BeanNameAutoProxyCreator。
+
+35.Spring中有哪些父子？
+
+有父子类、父子BeanDefinition、父子BeanFacory、父子ApplicationContext
+
+36.Spring中有用的工具类？
+
+MessageSource 国际化、applicationContext.getResource获取资源、applicationContext.getEnvironment()获取运行时环境(操作系统变量、JVM环境变量、properties变量)、事件发布(ApplicationListener=>某个类作为事件监听器、、@EventListener=>某个方法作为事件监听器)、Order比较器、元数据读取器(获取类信息ASM技术)
+
+37.IOC和DI
+
+Spring中IOC就是控制反转，将对象之间的依赖关系，创建管理交给IOC容器，其是通过DI实现对象依赖的。
+
+38.紧耦合和松耦合的区别？
+
+紧耦合就是类与类之间高度耦合，高度依赖；松耦合则是通过促进单一职责和关注点分离、依赖倒置的设计原则来进行设计实现。
+
+39.Spring IOC的加载过程
+
+
+
+
+
+
+
+
+
+
+
 
 
 
