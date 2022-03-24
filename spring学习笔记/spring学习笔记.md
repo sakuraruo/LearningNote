@@ -28,7 +28,7 @@ BeanDefinition(Bean定义)=>构造方法推断(选出一个构造方法)=>实例
 
 8.实例化
 
-通过构造方法反射得到一个实例化对象，在Spring中，可以通过BeanPostProcessor机制大队实例化进行干预。
+通过构造方法反射得到一个实例化对象，在Spring中，可以通过BeanPostProcessor机制对实例化进行干预。
 
 9.属性填充
 
@@ -235,7 +235,71 @@ Spring中IOC就是控制反转，将对象之间的依赖关系，创建管理�
 
 紧耦合就是类与类之间高度耦合，高度依赖；松耦合则是通过促进单一职责和关注点分离、依赖倒置的设计原则来进行设计实现。
 
-39.Spring IOC的加载过程
+39.Spring IOC的加载过程 
+
+包括容器初始化、Bean初始化实例化、属性注入
+
+以XMLClassPathApplication为例:
+
+application加载xml资源=>AbstractApplicationContext的refresh函数载入Bean定义过程==>AbstractApplicationContext子类的refreshBeanFactory方法=>AbstractRefreshableApplicationContext子类的loadBeanDefinitions方法=>AbstractBeanDefinitionReader读取Bean定义资源=>资源加载器获取要读入的资源=>XmlBeanDefinitionReader加载Bean定义资源文件=>DefaultBeanDefinitionDocumentReader对Bean定义的Document对象解析=>BeanDefinitionParserDelagate解析Bean定义资源文件中的元素=>BeanDefinitionParserDelegate解析元素=>解析元素的子元素=>解析子元素=>解析过后的BeanDefinition在Ioc容器中的注册(Ioc)容器初始化结束=>DefaultListableBeanFactory向Ioc容器注册解析后的BeanDifinition(依赖注入开始)=>AbstractBeanFactory通过getBean向Ioc容器获取被管理的Bean=>AbstractAutoWireCapableBeanFactory创建Bean实例对象=>createBeanInstance方法创建Bean的java实例对象=>SimpleInstantiationStratage类使用默认的无参构造方法创建Bean实例对象=>populateBean方法对Bean属性的依赖注入=>BeanDefinitionValueResolver解析属性值=>BeanWrapperImpl对Bean属性注入
+
+40.SpringBean的生命周期
+
+1.Bean定义阶段:Spring Xml schema的拓展点，可以通过自定义标签，去定义自己的一套标签，去定义自己的一套标签。例如Dubbo。(相关类:NamespaceHandlerSupport)
+
+2.加载完BeanDefinition之后：容器加载完所有的BeanDefinition之后的拓展点，可以对容器内的BeanDefinition进行修改，或者继续添加BeanDefinition。(相关类：BeanDefinitionRegistryPostProcessor)
+
+3.处理完BeanDefinitionRegistryPostProcessor之后：(相关类BeanFactoryPostProcessor)。
+
+4.初始化Bean前从接口中生成Bean：（相关类InstantiationAwareBeanPostProcessorAdapter）
+
+5.如果没有生成Bean：
+
+5.1Bean执行初始化方法之前回调:（相关类BeanPostProcessor）
+
+5.2 实现了接口aware回调阶段（相关类BeanNameAware、BeanClassLoaderAware、BeanFactoryAware）
+
+5.3 实例化完成，决定是否填充Bean属性阶段（相关类 InstantiationAwareBeanPostProcessorAdapter  postProcessAfterInstantiation）
+
+5.4 添加修改属性，填充属性阶段 （相关类 InstantiationAwareBeanPostProcessorAdapter postProcessPropertyValues）
+
+5.5 Bean实现初始化接口回调 （相关类 InitializingBean afterPropertiesSet）
+
+5.6 Bean上显式指定的init method方法 (相关类 Bean的init method方法)
+
+6.如果已经生成了Bean（相关类InstantiationAwarePostProcessorAdapter）
+
+7.Bean执行初始化方法 （相关类BeanPostProcessor#postProcessAfterInitialization）
+
+8.业务模块正常调用
+
+9.容器销毁(DisposableBean destory)
+
+10.Bean上显式指定的destory method方法
+
+41.Spring事务传播行为
+
+1.Spring中有七种方式
+
+常用：Required 如果当前没有事务，就新建一个事务，如果已经存在一个事务中，加入到事务中 这是默认缺省值。
+
+Requires_new 新建事务，如果当前在事务中，则把当前事务挂起。
+
+不常用：
+
+supports：支持当前事务，如果当前没有事务，就以非事务方式执行（没有事务）。
+
+mandatory：使用当前的事务，如果当前没有事务，就抛出异常。
+
+Not_Supported：以非事务方式执行操作，如果当前存在事务，就把当前事务挂起。
+
+Never:以非事务方式运行，如果当前存在事务，抛出异常。
+
+NESTED：如果当前存在事务，则在嵌套事务中执行。如果当前没有事务，则执行类似ReQuired类似的操作。
+
+
+
+
 
 
 
