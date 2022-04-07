@@ -96,7 +96,7 @@
 
 2.控制器是重度依赖Zookeeper的。
 
-3.Apache Zookeeper是一个提供高可靠性的分布式协调服务框架。它使用的数据模型类似于文件系统的树形结构，根目录也是以" / "开始。该结构上的每个节点被称为Znode，用来保存一些元数据协调信息。Znode可以分为持久性Znode和临时Znode。持久性Znode不会因为Zookeeper集群重启而消失，而临时Znode则与创建该Znode的Zookeeper回话绑定，一旦会话结束，该节点就被删除。
+3.Apache Zookeeper是一个提供高可靠性的分布式协调服务框架。它使用的数据模型类似于文件系统的树形结构，根目录也是以" / "开始。该结构上的每个节点被称为Znode，用来保存一些元数据协调信息。Znode可以分为持久性Znode和临时Znode。持久性Znode不会因为Zookeeper集群重启而消失，而临时Znode则与创建该Znode的Zookeeper会话绑定，一旦会话结束，该节点就被删除。
 
 4.Zookeeper赋予客户端监控Znode变更的能力，即所谓的Watch通知功能。一旦Znode节点被创建、删除，子节点数量发生变化，抑或是Znode所存的数据本身变更，Zookeeper会通过节点变更监听器(ChangeHandle)的方式显式通知客户端。
 
